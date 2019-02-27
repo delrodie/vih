@@ -13,9 +13,30 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-        // replace this example code with whatever you need
-        return $this->render('default/index.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
-        ]);
+        return $this->render('default/index.html.twig');
+    }
+
+    /**
+     * @Route("menu", name="menu")
+     */
+    public function menuAction()
+    {
+        return $this->render("default/menu.html.twig");
+    }
+
+    /**
+     * @Route("rapport", name="rapport")
+     */
+    public function rapportAction()
+    {
+        return $this->render('default/rapport.html.twig');
+    }
+
+    /**
+     * @Route("journal", name="journal")
+     */
+    public function journalAction()
+    {
+        return $this->render('default/journal.html.twig');
     }
 }

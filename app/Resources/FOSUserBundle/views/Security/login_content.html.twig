@@ -4,19 +4,26 @@
     <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
 {% endif %}
 
-<form action="{{ path("fos_user_security_check") }}" method="post">
-    {% if csrf_token %}
-        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
-    {% endif %}
 
-    <label for="username">{{ 'security.login.username'|trans }}</label>
-    <input type="text" id="username" name="_username" value="{{ last_username }}" required="required" />
+<div class="" style="color: #fff;">
+    <div class="content-block-login">
+        <div class="form_logo"><img src="{{ absolute_url(asset('ressources/images/logo-02.png')) }}" alt="" title="" /></div>
+        <div class="loginform">
+            <form action="{{ path("fos_user_security_check") }}" method="post" id="LoginForm">
+                {% if csrf_token %}
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+                {% endif %}
 
-    <label for="password">{{ 'security.login.password'|trans }}</label>
-    <input type="password" id="password" name="_password" required="required" />
+                <input type="text" id="username" name="_username" value="{{ last_username }}" class="form_input required" required="required" placeholder="{{ 'security.login.username'|trans }}" />
 
-    <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
-    <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
+                <input type="password" id="password" name="_password" class="form_input required" required="required" placeholder="{{ 'security.login.password'|trans }}" />
 
-    <input type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
-</form>
+                <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+                <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
+
+                <input type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}"  class="form_submit"/>
+            </form>
+        </div>
+        <div class="close_loginpopup_button"><a href="#" class="close-popup"><img src="images/icons/white/menu_close.png" alt="" title="" /></a></div>
+    </div>
+</div>
