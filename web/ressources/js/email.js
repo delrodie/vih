@@ -2,10 +2,10 @@ function ajaxContact(theForm) {
 var $ = jQuery;
 $('#loader').fadeIn();
 var formData = $(theForm).serialize(),
-note = $('#Note');
+note = $('#Note');die('ici');
 $.ajax({
 type: "POST",
-url: "send.php",
+url: "/rapport/new",
 data: formData,
 success: function(response) {
 if ( note.height() ) {			

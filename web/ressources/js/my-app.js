@@ -8,7 +8,7 @@ var myApp = new Framework7({
 	swipeBackPageThreshold: 1,
 	swipePanel: "left",
 	swipePanelCloseOpposite: true,
-	pushState: true,
+	//pushState: true,
     template7Pages: true
 });
 

@@ -39,8 +39,13 @@
 
             <nav class="user-nav">
                 <ul>
+                    <li><a href="#" data-popup=".popup-home" class="open-popup"><img src="{{ asset('ressources/images/icons/white/home.png') }}" alt="" title="" /><span>Accueil</span></a></li>
+                    <li><a href="#" data-popup=".popup-home" class="open-popup"><img src="{{ asset('ressources/images/icons/white/slider.png') }}" alt="" title="" /><span>Statistique</span></a></li>
                     <li><a href="#" class="close-panel"><img src="{{ asset('ressources/images/icons/white/message.png') }}" alt="" title="" /><span>Messages</span><strong class="green">12</strong></a></li>
-                    <li><a href="{{ path('homepage') }}" class="close-panel"><img src="{{ asset('ressources/images/icons/white/settings.png') }}" alt="" title="" /><span>Récherger la page</span></a></li>
+                    <li><a href="#" data-popup=".popup-home" class="open-popup"><img src="{{ asset('ressources/images/icons/white/settings.png') }}" alt="" title="" /><span>Récherger la page</span></a></li>
+                    <li><a href="#" data-popup=".popup-rapport" class="open-popup"><img src="{{ asset('ressources/images/icons/white/form.png') }}" alt="" title="" /><span>Rapport</span></a></li>
+                    <li><a href="{{ path('rapport_index') }}" class="close-panel"><img src="{{ asset('ressources/images/icons/white/blog.png') }}" alt="" title="" /><span>Journal</span></a></li>
+                    <li><a href="#" class="close-panel"><img src="{{ asset('ressources/images/icons/white/photos.png') }}" alt="" title="" /><span>Photos</span></a></li>
                     <li><a href="{{ path('fos_user_security_logout') }}" class="open-popup"><img src="{{ asset('ressources/images/icons/white/lock.png') }}" alt="" title="" /><span>Se deconnecter</span></a></li>
                 </ul>
             </nav>
@@ -80,9 +85,9 @@
             <div class="toolbar">
                 <div class="toolbar-inner">
                     <ul class="toolbar_icons">
-                        <li><a href="#" data-panel="left" class="open-panel"><img src="{{ absolute_url(asset('ressources/images/icons/white/user.png')) }}" alt="" title="" /></a></li>
-                        <li class="menuicon"><a href="{{ path('menu') }}"><img src="{{ absolute_url(asset('ressources/images/icons/white/menu.png')) }}" alt="" title="" /></a></li>
-                        <li><a href="{{ path('journal')}}"><img src="{{ absolute_url(asset('ressources/images/icons/white/blog.png')) }}" alt="" title="" /></a></li>
+                        <li class="menuicon"><a href="#" data-panel="left" class="open-panel"><img src="{{ absolute_url(asset('ressources/images/icons/white/menu.png')) }}" alt="" title="" /></a></li>
+                        <!--<li><a href="#" data-panel="left" class="open-panel"><img src="{{ absolute_url(asset('ressources/images/icons/white/user.png')) }}" alt="" title="" /></a></li>
+                        <li><a href="#"><img src="{{ absolute_url(asset('ressources/images/icons/white/blog.png')) }}" alt="" title="" /></a></li>-->
                     </ul>
                 </div>
             </div>
@@ -108,50 +113,29 @@
             <div class="close_loginpopup_button"><a href="#" class="close-popup"><img src="images/icons/white/menu_close.png" alt="" title="" /></a></div>
         </div>
     </div>
-
-    <!-- Register Popup -->
-    <div class="popup popup-signup">
+    <div class="popup popup-rapport">
         <div class="content-block-login">
-            <h4>REGISTER</h4>
-            <div class="form_logo"><img src="images/logo.png" alt="" title="" /></div>
             <div class="loginform">
-                <form id="RegisterForm" method="post">
-                    <input type="text" name="Username" value="" class="form_input required" placeholder="username" />
-                    <input type="text" name="Email" value="" class="form_input required" placeholder="email" />
-                    <input type="password" name="Password" value="" class="form_input required" placeholder="password" />
-                    <input type="submit" name="submit" class="form_submit" id="submit" value="SIGN UP" />
+                <form id="LoginForm" method="post" action="{{ path('rapport_new') }}">
+                    <input type="submit" name="submit" class="form_submit" id="submit" value="acceder a la page" />
                 </form>
-                <div class="signup_social">
-                    <a href="http://www.facebook.com/" class="signup_facebook external">FACEBOOK</a>
-                    <a href="http://www.twitter.com/" class="signup_twitter external">TWITTER</a>
-                </div>
             </div>
-            <div class="close_loginpopup_button"><a href="#" class="close-popup"><img src="images/icons/white/menu_close.png" alt="" title="" /></a></div>
+            <div class="close_loginpopup_button"><a href="#" class="close-popup"><img src="{{ asset('ressources/images/icons/white/menu_close.png') }}" alt="" title="" /></a></div>
         </div>
     </div>
-
-    <!-- Login Popup -->
-    <div class="popup popup-forgot">
+    <div class="popup popup-home">
         <div class="content-block-login">
-            <h4>FORGOT PASSWORD</h4>
-            <div class="form_logo"><img src="images/logo.png" alt="" title="" /></div>
             <div class="loginform">
-                <form id="ForgotForm" method="post">
-                    <input type="text" name="Email" value="" class="form_input required" placeholder="email" />
-                    <input type="submit" name="submit" class="form_submit" id="submit" value="RESEND PASSWORD" />
+                <form id="LoginForm" method="post" action="{{ path('homepage') }}">
+                    <input type="submit" name="submit" class="form_submit" id="submit" value="acceder a la page" />
                 </form>
-                <div class="signup_bottom">
-                    <p>Check your email and follow the instructions to reset your password.</p>
-                </div>
             </div>
-            <div class="close_loginpopup_button"><a href="#" class="close-popup"><img src="images/icons/white/menu_close.png" alt="" title="" /></a></div>
+            <div class="close_loginpopup_button"><a href="#" class="close-popup"><img src="{{ asset('ressources/images/icons/white/menu_close.png') }}" alt="" title="" /></a></div>
         </div>
     </div>
-
-
 
     <script type="text/javascript" src="{{ absolute_url(asset('ressources/js/jquery-1.10.1.min.js')) }}"></script>
-    <script src="{{ absolute_url(asset('ressources/js/jquery.validate.min.js')) }}" type="text/javascript"></script>
+    <!--<script src="{{ absolute_url(asset('ressources/js/jquery.validate.min.js')) }}" type="text/javascript"></script>-->
     <script type="text/javascript" src="{{ absolute_url(asset('ressources/js/framework7.js')) }}"></script>
     <script type="text/javascript" src="{{ absolute_url(asset('ressources/js/classie.js')) }}"></script>
     <script type="text/javascript" src="{{ absolute_url(asset('ressources/js/selectFx.js')) }}"></script>

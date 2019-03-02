@@ -25,7 +25,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("rapport", name="rapport")
+     * @Route("rapport", name="rapports")
      */
     public function rapportAction()
     {

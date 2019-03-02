@@ -1,0 +1,57 @@
+<div class="pages">
+    <div data-page="projects" class="page no-toolbar no-navbar">
+        <div class="page-content">
+
+            <div class="navbarpages">
+                <div class="nav_left_logo"><a href="#" data-panel="left" class="open-panel"><img src="{{ absolute_url(asset('ressources/images/logo-02.png')) }}" alt="" title="" /></a></div>
+                <div class="nav_right_button">
+                    <a href="#" data-panel="left" class="open-panel"><img src="{{ absolute_url(asset('ressources/images/icons/white/menu.png')) }}" alt="" title="" /></a>
+                </div>
+            </div>
+            <div id="pages_maincontent">
+
+                <h2 class="page_title">Rapports journaliers </h2>
+
+                <div class="page_content">
+
+                    <div class="list-block">
+                        <ul class="posts">
+
+                            {% for rapport in rapports %}
+                                <li class="swipeout">
+                                    <div class="swipeout-content item-content">
+                                        <div class="post_entry">
+                                            <div class="post_date">
+                                                <span class="day">{{ rapport.date|date("d") }}</span>
+                                                <span class="month">{{ rapport.date|date('M') }}</span>
+                                            </div>
+                                            <div class="post_title">
+                                                <h2><a href="{{ path('rapport_show', {'slug': rapport.slug}) }}">{{ rapport.ville }} <br> {{ rapport.quartier }}</a></h2>
+                                            </div>
+                                            <div class="post_swipe"><img src="{{ asset('ressources/images/swipe_more.png') }}" alt="" title="" /></div>
+                                        </div>
+                                    </div>
+                                    <div class="swipeout-actions-right">
+                                        <a href="blog-single.html" class="action1"><img src="images/icons/white/message.png" alt="" title="" /></a>
+                                        <a href="#" class="action1 open-popup" data-popup=".popup-social"><img src="images/icons/white/like.png" alt="" title="" /></a>
+                                        <a href="#" class="action1 open-popup" data-popup=".popup-social"><img src="images/icons/white/contact.html" alt="" title="" /></a>
+                                    </div>
+                                </li>
+                            {% endfor %}
+
+
+                        </ul>
+
+                        <div class="clear"></div>
+                        <div id="loadMore"><img src="{{ asset('ressources/images/load_posts.png') }}" alt="" title="" /></div>
+                        <div id="showLess"><img src="{{ asset('ressources/images/load_posts_disabled.png') }}" alt="" title="" /></div>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+</div>

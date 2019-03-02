@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+	<title>{% block title %}Campagne VIH{% endblock %}</title>
+	<link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	{% block stylesheets %}
+		<link rel="stylesheet" href="{{ absolute_url(asset('ressources/css/framework7.css')) }}">
+		<link rel="stylesheet" href="{{ absolute_url(asset('ressources/style.css')) }}">
+		<link rel="stylesheet" href="{{ absolute_url(asset('ressources/css/colors/magenta.css')) }}">
+		<link type="text/css" rel="stylesheet" href="{{ absolute_url(asset('ressources/css/swipebox.css')) }}" />
+		<link type="text/css" rel="stylesheet" href="{{ absolute_url(asset('ressources/css/animations.css')) }}" />
+		<link rel="stylesheet" href="{{ asset('ressources/css/calendar.css') }}">
+		<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,700,900' rel='stylesheet' type='text/css'>
+	{% endblock %}
+	<link rel="apple-touch-icon" href="images/apple-touch-icon.png" />
+	<link rel="apple-touch-startup-image" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)" href="apple-touch-startup-image-640x1096.html">
+
+</head>
+<body id="mobile_wrap">
+
+<div class="statusbar-overlay"></div>
+
+<div class="panel-overlay"></div>
+
+<div class="panel panel-left panel-cover">
+	<div class="user_login_info">
+		<div class="user_thumb">
+			<img src="{{ asset('ressources/images/profile.jpg') }}" alt="" title="" />
+			<div class="user_details">
+				<p>Hi, <span>John Doe</span></p>
+			</div>
+			<div class="user_social">
+				<a href="#" data-popup=".popup-social" class="open-popup"><img src="images/icons/white/twitter.png" alt="" title="" /></a>              </div>
+		</div>
+
+		<nav class="user-nav">
+			<ul>
+				<li><a href="#" data-popup=".popup-home" class="open-popup"><img src="{{ asset('ressources/images/icons/white/home.png') }}" alt="" title="" /><span>Accueil</span></a></li>
+				<li><a href="#" data-popup=".popup-home" class="open-popup"><img src="{{ asset('ressources/images/icons/white/slider.png') }}" alt="" title="" /><span>Statistique</span></a></li>
+				<li><a href="#" class="close-panel"><img src="{{ asset('ressources/images/icons/white/message.png') }}" alt="" title="" /><span>Messages</span><strong class="green">12</strong></a></li>
+				<li><a href="#" data-popup=".popup-home" class="open-popup"><img src="{{ asset('ressources/images/icons/white/settings.png') }}" alt="" title="" /><span>Récherger la page</span></a></li>
+				<li><a href="#" data-popup=".popup-rapport" class="open-popup"><img src="{{ asset('ressources/images/icons/white/form.png') }}" alt="" title="" /><span>Rapport</span></a></li>
+				<li><a href="{{ path('rapport_index') }}" class="close-panel"><img src="{{ asset('ressources/images/icons/white/blog.png') }}" alt="" title="" /><span>Journal</span></a></li>
+				<li><a href="#" class="close-panel"><img src="{{ asset('ressources/images/icons/white/photos.png') }}" alt="" title="" /><span>Photos</span></a></li>
+				<li><a href="{{ path('fos_user_security_logout') }}" class="open-popup"><img src="{{ asset('ressources/images/icons/white/lock.png') }}" alt="" title="" /><span>Se deconnecter</span></a></li>
+			</ul>
+		</nav>
+	</div>
+</div>
+
+
+<div class="views">
+
+	<div class="view view-main">
+
+		{% block body %}{% endblock %}
+
+
+		<!-- Bottom Toolbar-->
+		<!--<div class="toolbar">
+			<div class="toolbar-inner">
+				<ul class="toolbar_icons">
+					<li><a href="#" data-panel="left" class="open-panel"><img src="{{ absolute_url(asset('ressources/images/icons/white/user.png')) }}" alt="" title="" /></a></li>
+					<li class="menuicon"><a href="{{ path('menu') }}"><img src="{{ absolute_url(asset('ressources/images/icons/white/menu.png')) }}" alt="" title="" /></a></li>
+					<li><a href="{{ path('rapport_index')}}"><img src="{{ absolute_url(asset('ressources/images/icons/white/blog.png')) }}" alt="" title="" /></a></li>
+				</ul>
+			</div>
+		</div>-->
+	</div>
+</div>
+
+<!-- Login Popup -->
+<div class="popup popup-login">
+	<div class="content-block-login">
+		<h4>LOGIN</h4>
+		<div class="form_logo"><img src="images/logo.png" alt="" title="" /></div>
+		<div class="loginform">
+			<form id="LoginForm" method="post">
+				<input type="text" name="Username" value="" class="form_input required" placeholder="username" />
+				<input type="password" name="Password" value="" class="form_input required" placeholder="password" />
+				<div class="forgot_pass"><a href="#" data-popup=".popup-forgot" class="open-popup">Forgot Password?</a></div>
+				<input type="submit" name="submit" class="form_submit" id="submit" value="SIGN IN" />
+			</form>
+			<div class="signup_bottom">
+				<p>Don't have an account?</p>
+				<a href="#" data-popup=".popup-signup" class="open-popup">SIGN UP</a>            </div>
+		</div>
+		<div class="close_loginpopup_button"><a href="#" class="close-popup"><img src="images/icons/white/menu_close.png" alt="" title="" /></a></div>
+	</div>
+</div>
+
+<div class="popup popup-rapport">
+	<div class="content-block-login">
+		<div class="loginform">
+			<form id="LoginForm" method="post" action="{{ path('rapport_new') }}">
+				<input type="submit" name="submit" class="form_submit" id="submit" value="acceder a la page" />
+			</form>
+		</div>
+		<div class="close_loginpopup_button"><a href="#" class="close-popup"><img src="{{ asset('ressources/images/icons/white/menu_close.png') }}" alt="" title="" /></a></div>
+	</div>
+</div>
+<div class="popup popup-home">
+	<div class="content-block-login">
+		<div class="loginform">
+			<form id="LoginForm" method="post" action="{{ path('homepage') }}">
+				<input type="submit" name="submit" class="form_submit" id="submit" value="acceder a la page" />
+			</form>
+		</div>
+		<div class="close_loginpopup_button"><a href="#" class="close-popup"><img src="{{ asset('ressources/images/icons/white/menu_close.png') }}" alt="" title="" /></a></div>
+	</div>
+</div>
+
+{% block javascripts %}
+	<script type="text/javascript" src="{{ absolute_url(asset('ressources/js/jquery-1.10.1.min.js')) }}"></script>
+	<script src="{{ absolute_url(asset('ressources/js/jquery.validate.min.js')) }}" type="text/javascript"></script>
+	<script type="text/javascript" src="{{ absolute_url(asset('ressources/js/framework7.js')) }}"></script>
+	<script type="text/javascript" src="{{ absolute_url(asset('ressources/js/classie.js')) }}"></script>
+	<script type="text/javascript" src="{{ absolute_url(asset('ressources/js/selectFx.js')) }}"></script>
+	<script type="text/javascript" src="{{ absolute_url(asset('ressources/js/my-app.js')) }}"></script>
+	<script type="text/javascript" src="{{ absolute_url(asset('ressources/js/jquery.swipebox.js')) }}"></script>
+	<script type="text/javascript" src="{{ absolute_url(asset('ressources/js/email.js')) }}"></script>
+	<script src="{{ absolute_url(asset('ressources/js/Chart.min.js')) }}" type="text/javascript"></script>
+{% endblock %}
+<script>
+    var ctx = document.getElementById("myChart").getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+            datasets: [{
+                label: '# of Votes',
+                data: [12, 19, 3, 5, 2, 3],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255,99,132,1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero:true
+                    }
+                }]
+            }
+        }
+    });
+</script>
+<script>
+    Chart.defaults.global.tooltips.custom = function(tooltip) {
+        // Tooltip Element
+        var tooltipEl = document.getElementById('chartjs-tooltip');
+
+        // Hide if no tooltip
+        if (tooltip.opacity === 0) {
+            tooltipEl.style.opacity = 0;
+            return;
+        }
+
+        // Set caret Position
+        tooltipEl.classList.remove('above', 'below', 'no-transform');
+        if (tooltip.yAlign) {
+            tooltipEl.classList.add(tooltip.yAlign);
+        } else {
+            tooltipEl.classList.add('no-transform');
+        }
+
+        function getBody(bodyItem) {
+            return bodyItem.lines;
+        }
+
+        // Set Text
+        if (tooltip.body) {
+            var titleLines = tooltip.title || [];
+            var bodyLines = tooltip.body.map(getBody);
+
+            var innerHtml = '<thead>';
+
+            titleLines.forEach(function(title) {
+                innerHtml += '<tr><th>' + title + '</th></tr>';
+            });
+            innerHtml += '</thead><tbody>';
+
+            bodyLines.forEach(function(body, i) {
+                var colors = tooltip.labelColors[i];
+                var style = 'background:' + colors.backgroundColor;
+                style += '; border-color:' + colors.borderColor;
+                style += '; border-width: 2px';
+                var span = '<span class="chartjs-tooltip-key" style="' + style + '"></span>';
+                innerHtml += '<tr><td>' + span + body + '</td></tr>';
+            });
+            innerHtml += '</tbody>';
+
+            var tableRoot = tooltipEl.querySelector('table');
+            tableRoot.innerHTML = innerHtml;
+        }
+
+        var positionY = this._chart.canvas.offsetTop;
+        var positionX = this._chart.canvas.offsetLeft;
+
+        // Display, position, and set styles for font
+        tooltipEl.style.opacity = 1;
+        tooltipEl.style.left = positionX + tooltip.caretX + 'px';
+        tooltipEl.style.top = positionY + tooltip.caretY + 'px';
+        tooltipEl.style.fontFamily = tooltip._bodyFontFamily;
+        tooltipEl.style.fontSize = tooltip.bodyFontSize;
+        tooltipEl.style.fontStyle = tooltip._bodyFontStyle;
+        tooltipEl.style.padding = tooltip.yPadding + 'px ' + tooltip.xPadding + 'px';
+    };
+
+    var config = {
+        type: 'pie',
+        data: {
+            datasets: [{
+                data: [300, 50, 100, 40, 10],
+                backgroundColor: [
+                    window.chartColors.red,
+                    window.chartColors.orange,
+                    window.chartColors.yellow,
+                    window.chartColors.green,
+                    window.chartColors.blue,
+                ],
+            }],
+            labels: [
+                'Red',
+                'Orange',
+                'Yellow',
+                'Green',
+                'Blue'
+            ]
+        },
+        options: {
+            responsive: true,
+            legend: {
+                display: false
+            },
+            tooltips: {
+                enabled: false,
+            }
+        }
+    };
+
+    window.onload = function() {
+        var ctx = document.getElementById('chart-area').getContext('2d');
+        window.myPie = new Chart(ctx, config);
+    };
+</script>
+</body>
+
+</html>
+</html>
