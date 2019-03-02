@@ -37,6 +37,6 @@ class DefaultController extends Controller
      */
     public function journalAction()
     {
-        return $this->render('default/journal.html.twig');
+        return $this->render('default/statistique.html.twig');
     }
 }
