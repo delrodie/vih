@@ -58,6 +58,7 @@ background-size: 100%;
 -moz-background-size: cover;
 -o-background-size: cover; 
 background-size: cover;
+  color: #ffffff;
 }
 .navbarpages{
 background:url(../../images/colors/orange/header.jpg) no-repeat center center;

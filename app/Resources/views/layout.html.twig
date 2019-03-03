@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8" />
 	<title>{% block title %}Campagne VIH{% endblock %}</title>
-	<link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+	<link rel="icon" type="image/x-icon" href="{{ asset('ressources/images/favicon.ico') }}" />
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
 	<meta name="apple-mobile-web-app-capable" content="yes">
@@ -11,7 +11,7 @@
 	{% block stylesheets %}
 		<link rel="stylesheet" href="{{ absolute_url(asset('ressources/css/framework7.css')) }}">
 		<link rel="stylesheet" href="{{ absolute_url(asset('ressources/style.css')) }}">
-		<link rel="stylesheet" href="{{ absolute_url(asset('ressources/css/colors/magenta.css')) }}">
+		<link rel="stylesheet" href="{{ absolute_url(asset('ressources/css/colors/orange.css')) }}">
 		<link type="text/css" rel="stylesheet" href="{{ absolute_url(asset('ressources/css/swipebox.css')) }}" />
 		<link type="text/css" rel="stylesheet" href="{{ absolute_url(asset('ressources/css/animations.css')) }}" />
 		<link rel="stylesheet" href="{{ asset('ressources/css/calendar.css') }}">
@@ -32,7 +32,9 @@
 		<div class="user_thumb">
 			<img src="{{ asset('ressources/images/profile.jpg') }}" alt="" title="" />
 			<div class="user_details">
-				<p>Hi, <span>John Doe</span></p>
+				{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+					<p><span>{{ app.user.username|title }}</span></p>
+				{% endif %}
 			</div>
 		</div>
 
@@ -40,12 +42,12 @@
 			<ul>
 				<li><a href="#" data-popup=".popup-home" class="open-popup"><img src="{{ asset('ressources/images/icons/white/home.png') }}" alt="" title="" /><span>Accueil</span></a></li>
 				<li><a href="#" data-popup=".popup-statistique" class="open-popup"><img src="{{ asset('ressources/images/icons/white/slider.png') }}" alt="" title="" /><span>Statistique</span></a></li>
-				<li><a href="#" class="close-panel"><img src="{{ asset('ressources/images/icons/white/message.png') }}" alt="" title="" /><span>Messages</span><strong class="green">12</strong></a></li>
-				<li><a href="#" data-popup=".popup-home" class="open-popup"><img src="{{ asset('ressources/images/icons/white/settings.png') }}" alt="" title="" /><span>Récherger la page</span></a></li>
+				<li><a href="#" class="close-panel"><img src="{{ asset('ressources/images/icons/white/message.png') }}" alt="" title="" /><span>Messages</span><strong class="green">0</strong></a></li>
+				<li><a href="#" data-popup=".popup-home" class="open-popup"><img src="{{ asset('ressources/images/icons/white/phone.png') }}" alt="" title="" /><span>Call center</span></a></li>
 				<li><a href="#" data-popup=".popup-rapport" class="open-popup"><img src="{{ asset('ressources/images/icons/white/form.png') }}" alt="" title="" /><span>Rapport</span></a></li>
 				<li><a href="{{ path('rapport_index') }}" class="close-panel"><img src="{{ asset('ressources/images/icons/white/blog.png') }}" alt="" title="" /><span>Journal</span></a></li>
 				<li><a href="#" class="close-panel"><img src="{{ asset('ressources/images/icons/white/photos.png') }}" alt="" title="" /><span>Photos</span></a></li>
-				<li><a href="{{ path('fos_user_security_logout') }}" class="open-popup"><img src="{{ asset('ressources/images/icons/white/lock.png') }}" alt="" title="" /><span>Se deconnecter</span></a></li>
+				<li><a href="{{ path('fos_user_security_logout') }}" data-popup=".popup-deconnexion" class="open-popup"><img src="{{ asset('ressources/images/icons/white/lock.png') }}" alt="" title="" /><span>Se deconnecter</span></a></li>
 			</ul>
 		</nav>
 	</div>
@@ -97,6 +99,16 @@
 		<div class="loginform">
 			<form id="LoginForm" method="post" action="{{ path('rapport_new') }}">
 				<input type="submit" name="submit" class="form_submit" id="submit" value="Faites votre point" />
+			</form>
+		</div>
+		<div class="close_loginpopup_button"><a href="#" class="close-popup"><img src="{{ asset('ressources/images/icons/white/menu_close.png') }}" alt="" title="" /></a></div>
+	</div>
+</div>
+<div class="popup popup-deconnexion">
+	<div class="content-block-login">
+		<div class="loginform">
+			<form id="LoginForm" method="post" action="{{ path('fos_user_security_logout') }}">
+				<input type="submit" name="submit" class="form_submit" id="submit" value="se deconnecter" />
 			</form>
 		</div>
 		<div class="close_loginpopup_button"><a href="#" class="close-popup"><img src="{{ asset('ressources/images/icons/white/menu_close.png') }}" alt="" title="" /></a></div>

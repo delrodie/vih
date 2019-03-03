@@ -1,0 +1,78 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+    <div class="pages">
+        <div data-page="projects" class="page no-toolbar no-navbar">
+            <div class="page-content">
+
+                <div class="navbarpages">
+                    <div class="nav_left_logo"><a href="#" data-panel="left" class="open-panel"><img src="{{ absolute_url(asset('ressources/images/logo-02.png')) }}" alt="" title="" /></a></div>
+                    <div class="nav_right_button">
+                        <a href="#" data-panel="left" class="open-panel"><img src="{{ absolute_url(asset('ressources/images/icons/white/menu.png')) }}" alt="" title="" /></a>
+                        <a href="{{ path('zone_index') }}"><img src="{{ asset('ressources/images/icons/white/back.png') }}" alt="" title="" /></a>
+                    </div>
+                </div>
+                <div id="pages_maincontent">
+
+
+                    <h2 class="page_title">Modification de la zone</h2>
+
+                    <div class="page_content">
+
+                        <div class="contactform" id="contactForm">
+                            {{ form_start(edit_form) }}
+
+                            <label>Zone:</label>
+                            {{ form_widget(edit_form.libelle) }}
+
+                            <input type="submit" class="form_submit"   value="Modifier" />
+                            {{ form_end(edit_form) }}
+                            {{ form_start(delete_form) }}
+                            <input type="submit" value="Delete" class="form_submit">
+                            {{ form_end(delete_form) }}
+                        </div>
+
+
+
+                    </div>
+
+
+                    <h2 class="page_title">Liste des zones</h2>
+
+                    <div class="page_content">
+
+
+                        <ul class="responsive_table">
+                            <li class="table_row">
+                                <div class="table_section_small">N°</div>
+                                <div class="table_section">Zones</div>
+                                <div class="table_section">Statuts</div>
+                            </li>
+                            {% for zone in zones %}
+                                <li class="table_row">
+                                    <div class="table_section_small">{{ loop.index }}</div>
+                                    <div class="table_section">{{ zone.libelle }}</div>
+                                    <div class="table_section">
+                                        <a href="{{ path('zone_edit', {'slug': zone.slug}) }}">
+                                            {% if zone.statut %}
+                                                Actif
+                                            {% else %}
+                                                Désactivé
+                                            {% endif %}
+                                        </a>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        </ul>
+
+
+
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

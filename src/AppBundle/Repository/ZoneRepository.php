@@ -10,4 +10,8 @@ namespace AppBundle\Repository;
  */
 class ZoneRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findList()
+    {
+        return $this->createQueryBuilder('z')->orderBy('z.libelle', 'ASC')->getQuery()->getResult();
+    }
 }
