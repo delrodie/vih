@@ -47,6 +47,15 @@
 				<li><a href="#" data-popup=".popup-rapport" class="open-popup"><img src="{{ asset('ressources/images/icons/white/form.png') }}" alt="" title="" /><span>Rapport</span></a></li>
 				<li><a href="{{ path('rapport_index') }}" class="close-panel"><img src="{{ asset('ressources/images/icons/white/blog.png') }}" alt="" title="" /><span>Journal</span></a></li>
 				<li><a href="#" class="close-panel"><img src="{{ asset('ressources/images/icons/white/photos.png') }}" alt="" title="" /><span>Photos</span></a></li>
+				<li><a href="#" class="close-panel"><img src="{{ asset('ressources/images/icons/white/user.png') }}" alt="" title="" /><span>Agents</span></a></li>
+				{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+					{% if is_granted("ROLE_ADMIN") %}
+						<li><a href="#" data-popup=".popup-zone" class="open-popup"><img src="{{ asset('ressources/images/icons/white/download.png') }}" alt="" title="" /><span>Zone</span></a></li>
+					{% endif %}
+					{% if is_granted("ROLE_SUPER_ADMIN") %}
+						<li><a href="#" data-popup=".popup-user" class="open-popup"><img src="{{ asset('ressources/images/icons/white/user.png') }}" alt="" title="" /><span>Utilisateurs</span></a></li>
+					{% endif %}
+				{% endif %}
 				<li><a href="{{ path('fos_user_security_logout') }}" data-popup=".popup-deconnexion" class="open-popup"><img src="{{ asset('ressources/images/icons/white/lock.png') }}" alt="" title="" /><span>Se deconnecter</span></a></li>
 			</ul>
 		</nav>
@@ -119,6 +128,26 @@
 		<div class="loginform">
 			<form id="LoginForm" method="post" action="{{ path('homepage') }}">
 				<input type="submit" name="submit" class="form_submit" id="submit" value="acceder a la page d'accueil" />
+			</form>
+		</div>
+		<div class="close_loginpopup_button"><a href="#" class="close-popup"><img src="{{ asset('ressources/images/icons/white/menu_close.png') }}" alt="" title="" /></a></div>
+	</div>
+</div>
+<div class="popup popup-zone">
+	<div class="content-block-login">
+		<div class="loginform">
+			<form id="LoginForm" method="post" action="{{ path('zone_index') }}">
+				<input type="submit" name="submit" class="form_submit" id="submit" value="Gestion des zones" />
+			</form>
+		</div>
+		<div class="close_loginpopup_button"><a href="#" class="close-popup"><img src="{{ asset('ressources/images/icons/white/menu_close.png') }}" alt="" title="" /></a></div>
+	</div>
+</div>
+<div class="popup popup-user">
+	<div class="content-block-login">
+		<div class="loginform">
+			<form id="LoginForm" method="post" action="{{ path('admin_user_new') }}">
+				<input type="submit" name="submit" class="form_submit" id="submit" value="Gestion des utilisateurs" />
 			</form>
 		</div>
 		<div class="close_loginpopup_button"><a href="#" class="close-popup"><img src="{{ asset('ressources/images/icons/white/menu_close.png') }}" alt="" title="" /></a></div>

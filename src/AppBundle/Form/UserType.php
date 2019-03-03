@@ -3,6 +3,7 @@
 namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -23,36 +24,38 @@ class UserType extends AbstractType
         $builder
             ->add('username', TextType::class, array(
               'attr'  => array(
-                  'class' => 'form-control',
+                  'class' => 'form_input',
                   'autocomplete'  => 'off'
               )
         ))
             //->add('usernameCanonical')
             ->add('email', EmailType::class, array(
               'attr'  => array(
-                  'class' => 'form-control',
+                  'class' => 'form_input',
                   'autocomplete'  => 'off'
               )
         ))
             //->add('emailCanonical')
-            ->add('enabled')
+            ->add('password', PasswordType::class, [
+                'attr' => ['class'=>'form_input'],
+                'required' => false
+            ])
+            ->add('enabled', CheckboxType::class,['required'=>false])
             //->add('salt')
-            ->add('plainPassword', RepeatedType::class, array(
+            /*->add('plainPassword', RepeatedType::class, array(
                 'type' => PasswordType::class,
                 'invalid_message' => 'Les mots de passe doivent être identiques.',
                 'required' => $options['passwordRequired'],
                 'first_options'  => array('label' => 'Mot de passe'),
                 'second_options' => array('label' => 'Répétez le mot de passe'),
-            ))
+            ))*/
             //->add('lastLogin')->add('confirmationToken')->add('passwordRequestedAt')
             ->add('roles', ChoiceType::class, array(
               'choices' => array(
                 'UTILISATEUR '  => 'ROLE_USER',
+                'CALL CENTER '  => 'ROLE_CALL',
+                'SUPERVISEUR '  => 'ROLE_SUP',
                 'ADMINISTRATEUR '  => 'ROLE_ADMIN',
-              ),
-              'attr'  => array(
-                  'class' => 'form-control',
-                  'autocomplete'  => 'off'
               ),
               'multiple'  => true,
               'expanded'  => true

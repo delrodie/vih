@@ -1,63 +1,86 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout.html.twig' %}
 
 {% block body %}
-    <h1>Users list</h1>
+    <div class="pages">
+        <div data-page="projects" class="page no-toolbar no-navbar">
+            <div class="page-content">
 
-    <table>
-        <thead>
-            <tr>
-                <th>Username</th>
-                <th>Usernamecanonical</th>
-                <th>Email</th>
-                <th>Emailcanonical</th>
-                <th>Enabled</th>
-                <th>Salt</th>
-                <th>Password</th>
-                <th>Lastlogin</th>
-                <th>Confirmationtoken</th>
-                <th>Passwordrequestedat</th>
-                <th>Roles</th>
-                <th>Logincount</th>
-                <th>Firstlogin</th>
-                <th>Id</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for user in users %}
-            <tr>
-                <td><a href="{{ path('admin_user_show', { 'id': user.id }) }}">{{ user.username }}</a></td>
-                <td>{{ user.usernameCanonical }}</td>
-                <td>{{ user.email }}</td>
-                <td>{{ user.emailCanonical }}</td>
-                <td>{% if user.enabled %}Yes{% else %}No{% endif %}</td>
-                <td>{{ user.salt }}</td>
-                <td>{{ user.password }}</td>
-                <td>{% if user.lastLogin %}{{ user.lastLogin|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{{ user.confirmationToken }}</td>
-                <td>{% if user.passwordRequestedAt %}{{ user.passwordRequestedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if user.roles %}{{ user.roles|join(', ') }}{% endif %}</td>
-                <td>{{ user.loginCount }}</td>
-                <td>{% if user.firstLogin %}{{ user.firstLogin|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{{ user.id }}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('admin_user_show', { 'id': user.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('admin_user_edit', { 'id': user.id }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+                <div class="navbarpages">
+                    <div class="nav_left_logo"><a href="#" data-panel="left" class="open-panel"><img src="{{ absolute_url(asset('ressources/images/logo-02.png')) }}" alt="" title="" /></a></div>
+                    <div class="nav_right_button">
+                        <a href="#" data-panel="left" class="open-panel"><img src="{{ absolute_url(asset('ressources/images/icons/white/menu.png')) }}" alt="" title="" /></a>
+                    </div>
+                </div>
+                <div id="pages_maincontent">
 
-    <ul>
-        <li>
-            <a href="{{ path('admin_user_new') }}">Create a new user</a>
-        </li>
-    </ul>
+                    <h2 class="page_title">Liste des utilisateurs</h2>
+
+                    <div class="page_content">
+
+
+                        <ul class="responsive_table">
+                            <li class="table_row">
+                                <div class="table_section_small">N°</div>
+                                <div class="table_section">Zones</div>
+                                <div class="table_section">Statuts</div>
+                            </li>
+                            {% for user in users %}
+                                <li class="table_row">
+                                    <div class="table_section_small">{{ loop.index }}</div>
+                                    <div class="table_section"><a href="{{ path('admin_user_edit', {'id': user.id}) }}">{{ user.username }}</a></div>
+                                    <div class="table_section">
+                                        {% if user.roles %}
+                                            {% if user.roles|first == 'ROLE_CALL' %}
+                                                Call center
+                                                   {% if user.enabled %}
+                                                    <span style="font-size: 0.8em; font-weight: bold; color: #0b8606;">(actif)</span>
+                                                   {% else %}
+                                                       <span style="font-size: 0.8em; font-weight: bold; color: #f20c0f;">(désactivé)</span>
+                                                   {% endif %}
+                                            {% elseif user.roles|first == 'ROLE_SUP' %}
+                                                Superviseur
+                                                {% if user.enabled %}
+                                                    <span style="font-size: 0.8em; font-weight: bold; color: #0b8606;">(actif)</span>
+                                                {% else %}
+                                                    <span style="font-size: 0.8em; font-weight: bold; color: #f20c0f;">(désactivé)</span>
+                                                {% endif %}
+                                                <a href="#">Gestion</a>
+                                            {% elseif user.roles|first == 'ROLE_ADMIN' %}
+                                                Administrateur
+                                                {% if user.enabled %}
+                                                    <span style="font-size: 0.8em; font-weight: bold; color: #0b8606;">(actif)</span>
+                                                {% else %}
+                                                    <span style="font-size: 0.8em; font-weight: bold; color: #f20c0f;">(désactivé)</span>
+                                                {% endif %}
+                                            {% elseif user.roles|first == 'ROLE_SUPER_ADMIN' %}
+                                                Super Admin
+                                                {% if user.enabled %}
+                                                    <span style="font-size: 0.8em; font-weight: bold; color: #0b8606;">(actif)</span>
+                                                {% else %}
+                                                    <span style="font-size: 0.8em; font-weight: bold; color: #f20c0f;">(désactivé)</span>
+                                                {% endif %}
+                                            {% else %}
+                                                Utilisateur
+                                                {% if user.enabled %}
+                                                    <span style="font-size: 0.8em; font-weight: bold; color: #0b8606;">(actif)</span>
+                                                {% else %}
+                                                    <span style="font-size: 0.8em; font-weight: bold; color: #f20c0f;">(désactivé)</span>
+                                                {% endif %}
+                                            {% endif %}
+                                        {% endif %}
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        </ul>
+
+
+
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
 {% endblock %}
