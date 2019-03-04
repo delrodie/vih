@@ -44,7 +44,7 @@
                                                 {% else %}
                                                     <span style="font-size: 0.8em; font-weight: bold; color: #f20c0f;">(désactivé)</span>
                                                 {% endif %}
-                                                <a href="#"><span style="font-size: 0.8em; font-weight: bold; color: #0303ab;">Gestion</span></a>
+                                                <a href="{{ path('admin_gestionnaire_new', {'user': user.username}) }}"><span style="font-size: 0.8em; font-weight: bold; color: #0303ab;">Gestion</span></a>
                                             {% elseif user.roles|first == 'ROLE_ADMIN' %}
                                                 Administrateur
                                                 {% if user.enabled %}

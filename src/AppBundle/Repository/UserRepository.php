@@ -15,4 +15,14 @@ class UserRepository extends EntityRepository
             ->getQuery()->getResult()
             ;
     }
+
+    public function findUser()
+    {
+        return $this->createQueryBuilder('u')
+                    ->where('u.username <> :user')
+                    ->orderBy('u.username', 'ASC')
+                    ->setParameter('user', 'delrodie')
+            ;
+    }
+
 }

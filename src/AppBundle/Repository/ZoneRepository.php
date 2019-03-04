@@ -14,4 +14,9 @@ class ZoneRepository extends \Doctrine\ORM\EntityRepository
     {
         return $this->createQueryBuilder('z')->orderBy('z.libelle', 'ASC')->getQuery()->getResult();
     }
+
+    public function findZone()
+    {
+        return $this->createQueryBuilder('z')->orderBy('z.libelle', 'ASC');
+    }
 }

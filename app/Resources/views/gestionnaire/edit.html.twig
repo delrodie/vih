@@ -1,0 +1,53 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+    <div class="pages">
+        <div data-page="projects" class="page no-toolbar no-navbar">
+            <div class="page-content">
+
+                <div class="navbarpages">
+                    <div class="nav_left_logo"><a href="#" data-panel="left" class="open-panel"><img src="{{ absolute_url(asset('ressources/images/logo-02.png')) }}" alt="" title="" /></a></div>
+                    <div class="nav_right_button"><a href="#" data-panel="left" class="open-panel"><img src="{{ absolute_url(asset('ressources/images/icons/white/menu.png')) }}" alt="" title="" /></a></div>
+                </div>
+                <div id="pages_maincontent">
+
+                    <h2 class="page_title">Modification des gestionnaires</h2>
+
+                    <div class="page_content">
+
+                        <div class="contactform" id="contactForm">
+                            {{ form_start(edit_form) }}
+
+
+                            <label>Utilisateur:</label>
+                            {{ form_widget(edit_form.user) }}
+
+                            <label>Zone:</label>
+                            {{ form_widget(edit_form.zone) }}
+
+                            <label>Nom:</label>
+                            {{ form_widget(edit_form.nom) }}
+
+                            <label>Prenoms:</label>
+                            {{ form_widget(edit_form.prenom) }}
+
+                            <label>Contact:</label>
+                            {{ form_widget(edit_form.contact) }}
+                            {{ form_rest(edit_form) }}
+
+                            <input type="submit" name="submit" class="form_submit"   value="Modifier" />
+                            {{ form_end(edit_form) }}
+                        </div>
+
+
+
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

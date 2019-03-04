@@ -54,6 +54,7 @@
 					{% endif %}
 					{% if is_granted("ROLE_SUPER_ADMIN") %}
 						<li><a href="#" data-popup=".popup-user" class="open-popup"><img src="{{ asset('ressources/images/icons/white/user.png') }}" alt="" title="" /><span>Utilisateurs</span></a></li>
+						<li><a href="#" data-popup=".popup-gestionnaire" class="open-popup"><img src="{{ asset('ressources/images/icons/white/user.png') }}" alt="" title="" /><span>Gestionnaire</span></a></li>
 					{% endif %}
 				{% endif %}
 				<li><a href="{{ path('fos_user_security_logout') }}" data-popup=".popup-deconnexion" class="open-popup"><img src="{{ asset('ressources/images/icons/white/lock.png') }}" alt="" title="" /><span>Se deconnecter</span></a></li>
@@ -148,6 +149,16 @@
 		<div class="loginform">
 			<form id="LoginForm" method="post" action="{{ path('admin_user_new') }}">
 				<input type="submit" name="submit" class="form_submit" id="submit" value="Gestion des utilisateurs" />
+			</form>
+		</div>
+		<div class="close_loginpopup_button"><a href="#" class="close-popup"><img src="{{ asset('ressources/images/icons/white/menu_close.png') }}" alt="" title="" /></a></div>
+	</div>
+</div>
+<div class="popup popup-gestionnaire">
+	<div class="content-block-login">
+		<div class="loginform">
+			<form id="LoginForm" method="post" action="{{ path('admin_gestionnaire_new') }}">
+				<input type="submit" name="submit" class="form_submit" id="submit" value="Gestion des gestionnaires" />
 			</form>
 		</div>
 		<div class="close_loginpopup_button"><a href="#" class="close-popup"><img src="{{ asset('ressources/images/icons/white/menu_close.png') }}" alt="" title="" /></a></div>

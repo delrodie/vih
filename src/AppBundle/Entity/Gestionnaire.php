@@ -6,12 +6,12 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Zone
+ * Gestionnaire
  *
- * @ORM\Table(name="zone")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\ZoneRepository")
+ * @ORM\Table(name="gestionnaire")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\GestionnaireRepository")
  */
-class Zone
+class Gestionnaire
 {
     /**
      * @var int
@@ -25,26 +25,39 @@ class Zone
     /**
      * @var string
      *
-     * @ORM\Column(name="libelle", type="string", length=255)
+     * @ORM\Column(name="nom", type="string", length=255, nullable=true)
      */
-    private $libelle;
-
-    /**
-     * @var bool
-     *
-     * @ORM\Column(name="statut", type="boolean", nullable=true)
-     */
-    private $statut;
-
-    /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Gestionnaire", mappedBy="zone")
-     */
-    private $gestionnaires;
+    private $nom;
 
     /**
      * @var string
      *
-     * @Gedmo\Slug(fields={"libelle"})
+     * @ORM\Column(name="prenom", type="string", length=255, nullable=true)
+     */
+    private $prenom;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="contact", type="string", length=255, nullable=true)
+     */
+    private $contact;
+
+    /**
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\User")
+     */
+    private $user;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Zone", inversedBy="gestionnaires")
+     * @ORM\JoinColumn(name="zone_id", referencedColumnName="id")
+     */
+    private $zone;
+
+    /**
+     * @var string
+     *
+     * @Gedmo\Slug(fields={"nom","prenom"})
      * @ORM\Column(name="slug", type="string", length=75)
      */
     private $slug;
@@ -94,51 +107,75 @@ class Zone
     }
 
     /**
-     * Set libelle
+     * Set nom
      *
-     * @param string $libelle
+     * @param string $nom
      *
-     * @return Zone
+     * @return Gestionnaire
      */
-    public function setLibelle($libelle)
+    public function setNom($nom)
     {
-        $this->libelle = $libelle;
+        $this->nom = $nom;
 
         return $this;
     }
 
     /**
-     * Get libelle
+     * Get nom
      *
      * @return string
      */
-    public function getLibelle()
+    public function getNom()
     {
-        return $this->libelle;
+        return $this->nom;
     }
 
     /**
-     * Set statut
+     * Set prenom
      *
-     * @param boolean $statut
+     * @param string $prenom
      *
-     * @return Zone
+     * @return Gestionnaire
      */
-    public function setStatut($statut)
+    public function setPrenom($prenom)
     {
-        $this->statut = $statut;
+        $this->prenom = $prenom;
 
         return $this;
     }
 
     /**
-     * Get statut
+     * Get prenom
      *
-     * @return bool
+     * @return string
      */
-    public function getStatut()
+    public function getPrenom()
     {
-        return $this->statut;
+        return $this->prenom;
+    }
+
+    /**
+     * Set contact
+     *
+     * @param string $contact
+     *
+     * @return Gestionnaire
+     */
+    public function setContact($contact)
+    {
+        $this->contact = $contact;
+
+        return $this;
+    }
+
+    /**
+     * Get contact
+     *
+     * @return string
+     */
+    public function getContact()
+    {
+        return $this->contact;
     }
 
     /**
@@ -146,7 +183,7 @@ class Zone
      *
      * @param string $slug
      *
-     * @return Zone
+     * @return Gestionnaire
      */
     public function setSlug($slug)
     {
@@ -170,7 +207,7 @@ class Zone
      *
      * @param string $publiePar
      *
-     * @return Zone
+     * @return Gestionnaire
      */
     public function setPubliePar($publiePar)
     {
@@ -194,7 +231,7 @@ class Zone
      *
      * @param string $modifiePar
      *
-     * @return Zone
+     * @return Gestionnaire
      */
     public function setModifiePar($modifiePar)
     {
@@ -218,7 +255,7 @@ class Zone
      *
      * @param \DateTime $publieLe
      *
-     * @return Zone
+     * @return Gestionnaire
      */
     public function setPublieLe($publieLe)
     {
@@ -242,7 +279,7 @@ class Zone
      *
      * @param \DateTime $modifieLe
      *
-     * @return Zone
+     * @return Gestionnaire
      */
     public function setModifieLe($modifieLe)
     {
@@ -260,50 +297,52 @@ class Zone
     {
         return $this->modifieLe;
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->gestionnaires = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
     /**
-     * Add gestionnaire
+     * Set user
      *
-     * @param \AppBundle\Entity\Gestionnaire $gestionnaire
+     * @param \AppBundle\Entity\User $user
      *
-     * @return Zone
+     * @return Gestionnaire
      */
-    public function addGestionnaire(\AppBundle\Entity\Gestionnaire $gestionnaire)
+    public function setUser(\AppBundle\Entity\User $user = null)
     {
-        $this->gestionnaires[] = $gestionnaire;
+        $this->user = $user;
 
         return $this;
     }
 
     /**
-     * Remove gestionnaire
+     * Get user
      *
-     * @param \AppBundle\Entity\Gestionnaire $gestionnaire
+     * @return \AppBundle\Entity\User
      */
-    public function removeGestionnaire(\AppBundle\Entity\Gestionnaire $gestionnaire)
+    public function getUser()
     {
-        $this->gestionnaires->removeElement($gestionnaire);
+        return $this->user;
     }
 
     /**
-     * Get gestionnaires
+     * Set zone
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @param \AppBundle\Entity\Zone $zone
+     *
+     * @return Gestionnaire
      */
-    public function getGestionnaires()
+    public function setZone(\AppBundle\Entity\Zone $zone = null)
     {
-        return $this->gestionnaires;
+        $this->zone = $zone;
+
+        return $this;
     }
 
-    public function __toString()
+    /**
+     * Get zone
+     *
+     * @return \AppBundle\Entity\Zone
+     */
+    public function getZone()
     {
-        return $this->getLibelle();
+        return $this->zone;
     }
 }
