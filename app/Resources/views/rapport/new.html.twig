@@ -20,20 +20,8 @@
 
 
                             <label>Date:</label>
-                            <div class="selector_overlay">
-                                <select class="cs-select cs-skin-overlay selectoptions" name="mois">
-                                    <option value="" disabled="disabled" selected>Selectionnez le mois</option>
-                                    <option value="02">Février</option>
-                                    <option value="03">Mars</option>
-                                    <option value="04">Avril</option>
-                                </select>
-                                <select class="cs-select cs-skin-overlay selectoptions" name="jour">
-                                    <option value="" disabled="disabled" selected>Selectionnez le jour</option>
-                                    {% for i in 01..31 %}
-                                        <option value="{{ i }}">{{ i }}</option>
-                                    {% endfor %}
-                                </select>
-                            </div>
+
+							<input type="date" name="date" class="form_input" min="{{ datedebut|date('Y-m-d') }}" max="2019-04-09">
                             <label>Ville:</label>
                             {{ form_widget(form.ville) }}
 

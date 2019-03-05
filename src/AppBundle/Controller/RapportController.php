@@ -6,6 +6,7 @@ use AppBundle\Entity\Rapport;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Validator\Constraints\Date;
 
 /**
  * Rapport controller.
@@ -46,9 +47,7 @@ class RapportController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
 
-            $mois = $request->get('mois');
-            $jour = $request->get('jour');
-            $date = '2019'.'-'.$mois.'-'.$jour; //dump($date);die();
+            $date = $request->get('date'); dump($date);die();
             $rapport->setStatut(1);
             $rapport->setDate($date);
             $em->persist($rapport);
@@ -56,10 +55,13 @@ class RapportController extends Controller
 
             return $this->redirectToRoute('rapport_show', array('slug' => $rapport->getSlug()));
         }
+        $datedebut = new \DateTime("now -3 day", new \DateTimeZone('Africa/Abidjan'));
+
 
         return $this->render('rapport/new.html.twig', array(
             'rapport' => $rapport,
             'form' => $form->createView(),
+            'datedebut' => $datedebut
         ));
     }
 
