@@ -42,6 +42,11 @@ class Zone
     private $gestionnaires;
 
     /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Rapport", mappedBy="zone")
+     */
+    private $rapports;
+
+    /**
      * @var string
      *
      * @Gedmo\Slug(fields={"libelle"})
@@ -305,5 +310,39 @@ class Zone
     public function __toString()
     {
         return $this->getLibelle();
+    }
+
+    /**
+     * Add rapport
+     *
+     * @param \AppBundle\Entity\Rapport $rapport
+     *
+     * @return Zone
+     */
+    public function addRapport(\AppBundle\Entity\Rapport $rapport)
+    {
+        $this->rapports[] = $rapport;
+
+        return $this;
+    }
+
+    /**
+     * Remove rapport
+     *
+     * @param \AppBundle\Entity\Rapport $rapport
+     */
+    public function removeRapport(\AppBundle\Entity\Rapport $rapport)
+    {
+        $this->rapports->removeElement($rapport);
+    }
+
+    /**
+     * Get rapports
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getRapports()
+    {
+        return $this->rapports;
     }
 }

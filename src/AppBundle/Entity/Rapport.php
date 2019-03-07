@@ -84,6 +84,12 @@ class Rapport
     private $commentaires;
 
     /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Zone", inversedBy="rapports")
+     * @ORM\JoinColumn(name="zone_id", referencedColumnName="id")
+     */
+    private $zone;
+
+    /**
      * @var string
      *
      * @Gedmo\Slug(fields={"ville","quartier"})
@@ -486,5 +492,29 @@ class Rapport
     public function getCommentaires()
     {
         return $this->commentaires;
+    }
+
+    /**
+     * Set zone
+     *
+     * @param \AppBundle\Entity\Zone $zone
+     *
+     * @return Rapport
+     */
+    public function setZone(\AppBundle\Entity\Zone $zone = null)
+    {
+        $this->zone = $zone;
+
+        return $this;
+    }
+
+    /**
+     * Get zone
+     *
+     * @return \AppBundle\Entity\Zone
+     */
+    public function getZone()
+    {
+        return $this->zone;
     }
 }

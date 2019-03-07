@@ -25,8 +25,15 @@ class RapportController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
 
-        $rapports = $em->getRepository('AppBundle:Rapport')->findList();
+        $roles[] = $user->getRoles();
+        if (($roles[0][0] === 'ROLE_CALL') OR ($roles[0][0] === 'ROLE_SUP')){
+            $gestionnaire = $em->getRepository("AppBundle:Gestionnaire")->findOneBy(['user'=>$user->getId()]);
+            $rapports = $em->getRepository('AppBundle:Rapport')->findList($gestionnaire->getZone()->getId());
+        }else{
+            $rapports = $em->getRepository('AppBundle:Rapport')->findList();
+        }
 
         return $this->render('rapport/index.html.twig', array(
             'rapports' => $rapports,
@@ -41,16 +48,26 @@ class RapportController extends Controller
      */
     public function newAction(Request $request)
     {
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser(); //
         $rapport = new Rapport();
         $form = $this->createForm('AppBundle\Form\RapportType', $rapport);
         $form->handleRequest($request); //die('ici cest pas bon');
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $gestionnaire = $em->getRepository('AppBundle:Gestionnaire')->findOneBy(['user'=>$user->getId()]);
 
             $date = $request->get('date'); //dump($date);die();
             $rapport->setStatut(1);
             $rapport->setDate($date);
+            if ($gestionnaire->getZone()){
+                $rapport->setZone($gestionnaire->getZone());
+            }else{
+                $zone = $em->getRepository("AppBundle:Zone")->findOneBy(['id'=>10]);
+                $rapport->setZone($zone);
+            }
+
             $em->persist($rapport);
             $em->flush();
 

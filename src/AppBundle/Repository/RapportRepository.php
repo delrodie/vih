@@ -10,13 +10,23 @@ namespace AppBundle\Repository;
  */
 class RapportRepository extends \Doctrine\ORM\EntityRepository
 {
-    public function findList()
+    public function findList($zone = null)
     {
-        return $this->createQueryBuilder('r')
-                    ->where('r.statut = 1')
-                    ->orderBy('r.date', 'DESC')
-                    ->getQuery()->getResult()
-            ;
+        if ($zone){
+            return $this->createQueryBuilder('r')
+                ->where('r.statut = 1')
+                ->andWhere('r.zone = :zone')
+                ->orderBy('r.date', 'DESC')
+                ->setParameter('zone', $zone)
+                ->getQuery()->getResult()
+                ;
+        } else{
+            return $this->createQueryBuilder('r')
+                ->where('r.statut = 1')
+                ->orderBy('r.date', 'DESC')
+                ->getQuery()->getResult()
+                ;
+        }
     }
 
     public function findRapport($rapport)
