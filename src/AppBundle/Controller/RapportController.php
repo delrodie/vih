@@ -73,13 +73,16 @@ class RapportController extends Controller
 
             return $this->redirectToRoute('rapport_show', array('slug' => $rapport->getSlug()));
         }
-        $datedebut = new \DateTime("now -3 day", new \DateTimeZone('Africa/Abidjan'));
+        //$datedebut = new \DateTime("now -3 day", new \DateTimeZone('Africa/Abidjan'));
+        $datefin = new \DateTime("now", new \DateTimeZone('Africa/Abidjan'));
+        $datedebut = "2019-03-01";
 
 
         return $this->render('rapport/new.html.twig', array(
             'rapport' => $rapport,
             'form' => $form->createView(),
-            'datedebut' => $datedebut
+            'datedebut' => $datedebut,
+            'datefin' => $datefin,
         ));
     }
 

@@ -21,7 +21,7 @@
 
                             <label>Date:</label>
 
-							<input type="date" name="date" class="form_input" min="{{ datedebut|date('Y-m-d') }}" max="2019-04-09">
+							<input type="date" name="date" class="form_input" min="{{ datedebut|date('Y-m-d') }}" max="{{ datefin|date('Y-m-d') }}">
                             <label>Ville:</label>
                             {{ form_widget(form.ville) }}
 
