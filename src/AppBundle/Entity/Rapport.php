@@ -79,6 +79,11 @@ class Rapport
     private $statut;
 
     /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Commentaire", mappedBy="rapport")
+     */
+    private $commentaires;
+
+    /**
      * @var string
      *
      * @Gedmo\Slug(fields={"ville","quartier"})
@@ -440,5 +445,46 @@ class Rapport
     public function getModifieLe()
     {
         return $this->modifieLe;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->commentaires = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add commentaire
+     *
+     * @param \AppBundle\Entity\Commentaire $commentaire
+     *
+     * @return Rapport
+     */
+    public function addCommentaire(\AppBundle\Entity\Commentaire $commentaire)
+    {
+        $this->commentaires[] = $commentaire;
+
+        return $this;
+    }
+
+    /**
+     * Remove commentaire
+     *
+     * @param \AppBundle\Entity\Commentaire $commentaire
+     */
+    public function removeCommentaire(\AppBundle\Entity\Commentaire $commentaire)
+    {
+        $this->commentaires->removeElement($commentaire);
+    }
+
+    /**
+     * Get commentaires
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCommentaires()
+    {
+        return $this->commentaires;
     }
 }

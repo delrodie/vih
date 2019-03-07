@@ -18,4 +18,9 @@ class RapportRepository extends \Doctrine\ORM\EntityRepository
                     ->getQuery()->getResult()
             ;
     }
+
+    public function findRapport($rapport)
+    {
+        return $this->createQueryBuilder('r')->where('r.id = :id')->setParameter('id', $rapport);
+    }
 }

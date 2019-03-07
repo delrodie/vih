@@ -1,0 +1,14 @@
+{% for rapport in rapports %}
+	<!-- rapport {{ rapport.id }} -->
+	<div class="popup popup-details{{ rapport.id }}">
+		<div class="content-block-login">
+			<div class="loginform">
+				<form id="LoginForm" method="post" action="{{ path('rapport_show', {'slug': rapport.slug}) }}">
+					<input type="hidden" name="rapport" value="{{ rapport.id }}">
+					<input type="submit" name="submit" class="form_submit" id="submit" value="Voir les details" />
+				</form>
+			</div>
+			<div class="close_loginpopup_button"><a href="#" class="close-popup"><img src="{{ asset('ressources/images/icons/white/menu_close.png') }}" alt="" title="" /></a></div>
+		</div>
+	</div>
+{% endfor %}

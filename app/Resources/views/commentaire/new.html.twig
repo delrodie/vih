@@ -42,15 +42,27 @@
                     <div class="page_content">
                         <a href="#" data-popup=".popup-commentaire" class="open-popup"><button class="form_submit">Faire des observations</button></a>
                         <br><br>
-                        {% if commentaires %}
-                            <div class="buttons-row">
-                                <a href="#tab1" class="tab-link active button">Observations</a>
-                            </div>
-                        {% endif %}
+                        <div class="buttons-row">
+                            <a href="#tab1" class="tab-link active button">Commentaires</a>
+                            <a href="#tab2" class="tab-link button">Observations</a>
+                        </div>
 
                         <div class="tabs-animated-wrap">
                             <div class="tabs">
                                 <div id="tab1" class="tab active">
+                                    <div class="commentform">
+                                        {{ form_start(form) }}
+                                        {{ form_widget(form.rapport) }}
+
+                                        {{ form_widget(form.contenu) }}
+                                        {{ form_rest(form) }}
+                                        <input type="hidden" name="rapport" value="{{ rapport.id }}">
+                                        <input type="submit" name="submit" class="form_submit" value="Envoyer" />
+                                        {{ form_end(form) }}
+                                    </div>
+                                </div>
+
+                                <div id="tab2" class="tab">
                                     <ul class="comments">
                                         {% for commentaire in commentaires %}
                                             <li class="comment_row">
@@ -84,20 +96,5 @@
         </div>
     </div>
 
-{% endblock %}
-
-{% block popup %}
-    {{ parent() }}
-    <div class="popup popup-commentaire">
-        <div class="content-block-login">
-            <div class="loginform">
-                <form id="LoginForm" method="post" action="{{ path('commentaire_new') }}">
-                    <input type="hidden" name="rapport" value="{{ rapport.id }}">
-                    <input type="submit" name="submit" class="form_submit" id="submit" value="Faites des observations" />
-                </form>
-            </div>
-            <div class="close_loginpopup_button"><a href="#" class="close-popup"><img src="{{ asset('ressources/images/icons/white/menu_close.png') }}" alt="" title="" /></a></div>
-        </div>
-    </div>
 {% endblock %}
 

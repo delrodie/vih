@@ -39,4 +39,17 @@ class DefaultController extends Controller
     {
         return $this->render('default/statistique.html.twig');
     }
+
+    /**
+     * @Route("observations", name="observation")
+     */
+    public function observationAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $rapports = $em->getRepository('AppBundle:Rapport')->findAll();
+
+        return $this->render('default/rapport_popup.html.twig',[
+            'rapports' => $rapports
+        ]);
+    }
 }

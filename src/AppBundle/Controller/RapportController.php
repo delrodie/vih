@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Commentaire;
 use AppBundle\Entity\Rapport;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -19,7 +20,7 @@ class RapportController extends Controller
      * Lists all rapport entities.
      *
      * @Route("/", name="rapport_index")
-     * @Method("GET")
+     * @Method({"POST","GET"})
      */
     public function indexAction()
     {
@@ -47,7 +48,7 @@ class RapportController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
 
-            $date = $request->get('date'); dump($date);die();
+            $date = $request->get('date'); //dump($date);die();
             $rapport->setStatut(1);
             $rapport->setDate($date);
             $em->persist($rapport);
@@ -69,15 +70,18 @@ class RapportController extends Controller
      * Finds and displays a rapport entity.
      *
      * @Route("/{slug}", name="rapport_show")
-     * @Method("GET")
+     * @Method({"POST", "GET"})
      */
-    public function showAction(Rapport $rapport)
+    public function showAction(Request $request, Rapport $rapport)
     {
         $deleteForm = $this->createDeleteForm($rapport);
+        $em = $this->getDoctrine()->getManager();
+        $commentaires = $em->getRepository('AppBundle:Commentaire')->findBy(['rapport'=>$rapport->getId()], ['id'=>'DESC']);
 
         return $this->render('rapport/show.html.twig', array(
             'rapport' => $rapport,
             'delete_form' => $deleteForm->createView(),
+            'commentaires' => $commentaires,
         ));
     }
 
