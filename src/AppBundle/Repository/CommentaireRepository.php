@@ -10,4 +10,16 @@ namespace AppBundle\Repository;
  */
 class CommentaireRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function compteur($zone = null)
+    {
+        return $this->createQueryBuilder('c')
+                    ->select('count(c.id)')
+                    ->innerJoin('c.rapport', 'r')
+                    ->where('r.zone = :zone')
+                    ->setParameters([
+                        'zone'=> $zone
+                    ])
+                    ->getQuery()->getSingleScalarResult()
+            ;
+    }
 }

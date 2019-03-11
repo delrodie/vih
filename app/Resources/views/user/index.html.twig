@@ -27,7 +27,10 @@
                             {% for user in users %}
                                 <li class="table_row">
                                     <div class="table_section_small">{{ loop.index }}</div>
-                                    <div class="table_section"><a href="{{ path('admin_user_edit', {'id': user.id}) }}">{{ user.username }}</a></div>
+                                    <div class="table_section">
+                                        <a href="{{ path('admin_user_edit', {'id': user.id}) }}">{{ user.username }}</a>
+                                        <span style="font-size: 0.8em; font-weight: bold; color: #0303ab;">({{ user.lastLogin|date('d M H:i') }})</span>
+                                    </div>
                                     <div class="table_section">
                                         {% if user.roles %}
                                             {% if user.roles|first == 'ROLE_CALL' %}

@@ -52,4 +52,26 @@ class DefaultController extends Controller
             'rapports' => $rapports
         ]);
     }
+
+    /**
+     * @Route("messages", name="messages")
+     */
+    public function messageAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
+
+        $roles[] = $user->getRoles();
+        if ($roles[0][0] === 'ROLE_SUP'){
+            $gestionnaire = $em->getRepository("AppBundle:Gestionnaire")->findOneBy(['user'=>$user->getId()]);
+            $cptCommentaire = $em->getRepository('AppBundle:Commentaire')->compteur($gestionnaire->getZone()->getId());
+            //die('ici');
+        }else{
+            $cptCommentaire = null;
+        }
+
+        return $this->render('default/message.html.twig',[
+            'compteur'=>$cptCommentaire
+        ]);
+    }
 }

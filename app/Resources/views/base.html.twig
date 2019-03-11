@@ -45,7 +45,7 @@
                         <li><a href="#" data-popup=".popup-home" class="open-popup"><img src="{{ asset('ressources/images/icons/white/phone.png') }}" alt="" title="" /><span>Call center</span></a></li>
                     {% endif %}
                     {% if is_granted("ROLE_SUP") %}
-                        <li><a href="#" class="close-panel"><img src="{{ asset('ressources/images/icons/white/message.png') }}" alt="" title="" /><span>Messages</span><strong class="green">0</strong></a></li>
+                        {{ render(url('messages')) }}
                     {% endif %}
                     <li><a href="#" data-popup=".popup-rapport" class="open-popup"><img src="{{ asset('ressources/images/icons/white/form.png') }}" alt="" title="" /><span>Rapport</span></a></li>
                     <li><a href="{{ path('rapport_index') }}" class="close-panel"><img src="{{ asset('ressources/images/icons/white/blog.png') }}" alt="" title="" /><span>Journal</span></a></li>
@@ -221,7 +221,7 @@
                 labels: ["Abidjan", "Bouake", "Daloa", "Korhogo", "Man", "San-Pedro"],
                 datasets: [{
                     label: '#Dépistés',
-                    data: [4500, 3000, 2500, 750, 1435, 2089],
+                    data: [819, 94, 73, 104, 148, 73],
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.9)',
                         'rgba(54, 162, 235, 0.9)',
@@ -258,7 +258,7 @@
             type: 'pie',
             data: {
                 datasets: [{
-                    data: [432890, 175876],
+                    data: [2000000, 2477],
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.9)',
                         'rgba(54, 162, 235, 0.7)',
