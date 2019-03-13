@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 class DefaultController extends Controller
 {
@@ -72,6 +73,20 @@ class DefaultController extends Controller
 
         return $this->render('default/message.html.twig',[
             'compteur'=>$cptCommentaire
+        ]);
+    }
+
+    /**
+     * @Route("{date}/call-center", name="callcenter")
+     * @Method("GET")
+     */
+    public function callAction($date)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $calls = $em->getRepository('AppBundle:Callcenter')->findBy(['date'=>$date]);
+        return $this->render('callcenter/calls.html.twig',[
+            'date' => $date,
+            'calls' => $calls,
         ]);
     }
 }

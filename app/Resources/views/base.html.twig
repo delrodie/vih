@@ -42,7 +42,7 @@
                     <li><a href="#" data-popup=".popup-home" class="open-popup"><img src="{{ asset('ressources/images/icons/white/home.png') }}" alt="" title="" /><span>Accueil</span></a></li>
                     <li><a href="#" data-popup=".popup-statistique" class="open-popup"><img src="{{ asset('ressources/images/icons/white/slider.png') }}" alt="" title="" /><span>Statistique</span></a></li>
                     {% if is_granted("ROLE_CALL") %}
-                        <li><a href="#" data-popup=".popup-home" class="open-popup"><img src="{{ asset('ressources/images/icons/white/phone.png') }}" alt="" title="" /><span>Call center</span></a></li>
+                        <li><a href="{{ path('callcenter_index') }}" class="close-panel"><img src="{{ asset('ressources/images/icons/white/phone.png') }}" alt="" title="" /><span>Call center</span></a></li>
                     {% endif %}
                     {% if is_granted("ROLE_SUP") %}
                         {{ render(url('messages')) }}
@@ -203,6 +203,16 @@
             <div class="close_loginpopup_button"><a href="#" class="close-popup"><img src="{{ asset('ressources/images/icons/white/menu_close.png') }}" alt="" title="" /></a></div>
         </div>
     </div>
+	<div class="popup popup-callcenter">
+		<div class="content-block-login">
+			<div class="loginform">
+				<form id="LoginForm" method="post" action="{{ path('callcenter_new') }}">
+					<input type="submit" name="submit" class="form_submit" id="submit" value="Rediger les appels" />
+				</form>
+			</div>
+			<div class="close_loginpopup_button"><a href="#" class="close-popup"><img src="{{ asset('ressources/images/icons/white/menu_close.png') }}" alt="" title="" /></a></div>
+		</div>
+	</div>
     {{ render(url('observation')) }}
     <script type="text/javascript" src="{{ absolute_url(asset('ressources/js/jquery-1.10.1.min.js')) }}"></script>
     <!--<script src="{{ absolute_url(asset('ressources/js/jquery.validate.min.js')) }}" type="text/javascript"></script>-->

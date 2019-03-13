@@ -1,0 +1,88 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+    <div class="pages">
+        <div data-page="projects" class="page no-toolbar no-navbar">
+            <div class="page-content">
+
+                <div class="navbarpages">
+                    <div class="nav_left_logo"><a href="#" data-panel="left" class="open-panel"><img src="{{ absolute_url(asset('ressources/images/logo-02.png')) }}" alt="" title="" /></a></div>
+                    <div class="nav_right_button"><a href="#" data-panel="left" class="open-panel"><img src="{{ absolute_url(asset('ressources/images/icons/white/menu.png')) }}" alt="" title="" /></a></div>
+                </div>
+                <div id="pages_maincontent">
+
+                    <h2 class="page_title">Enregistrement du call center</h2>
+
+                    <div class="page_content">
+
+                        <div class="contactform" id="contactForm">
+                            {{ form_start(form) }}
+
+                            <label>Numero:</label>
+                            {{ form_widget(form.numero) }}
+
+                            <label>Position:</label>
+                            {{ form_widget(form.position) }}
+
+                            <label>Preoccupation:</label>
+                            {{ form_widget(form.preoccupation) }}
+
+                            <label>Solutions:</label>
+                            {{ form_widget(form.solution) }}
+
+                            <label>Statut:</label>
+                            <label class="label-radio item-content">
+                                <input type="radio" name="statut" value="0" checked="checked">
+                                <div class="item-inner">
+                                    <div class="item-title">Problème résolu</div>
+                                </div>
+                            </label>
+
+                            <label class="label-radio item-content">
+                                <input type="radio" name="statut" value="1">
+                                <div class="item-inner">
+                                    <div class="item-title">Rappel</div>
+                                </div>
+                            </label>
+
+                            <label class="label-radio item-content">
+                                <input type="radio" name="statut" value="2">
+                                <div class="item-inner">
+                                    <div class="item-title">Rédiriger vers Stéphane</div>
+                                </div>
+                            </label>
+                            {{ form_rest(form) }}
+
+                            <input type="submit" name="submit" class="form_submit"   value="Envoyer" />
+                            {{ form_end(form) }}
+                        </div>
+
+
+
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('ressources/css/bootstrap-datepicker.min.css') }}">
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ absolute_url(asset('ressources/vendor/js/bootstrap-datepicker.min.js')) }}" type="text/javascript"></script>
+    <script>
+        $('#sandbox-container input').datepicker({
+            format: "yyyy-mm-dd",
+            language: "fr",
+            autoclose: true,
+            todayHighlight: true,
+            toggleActive: true
+        });
+    </script>
+{% endblock %}
