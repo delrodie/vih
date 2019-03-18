@@ -22,10 +22,10 @@ class ObjectifController extends Controller
         $user = $this->getUser();
 
         $roles[] = $user->getRoles();
-        if (($roles[0][0] === 'ROLE_CALL') OR ($roles[0][0] === 'ROLE_SUP')){
+        if ($roles[0][0] === 'ROLE_SUP'){
             $gestionnaire = $em->getRepository("AppBundle:Gestionnaire")->findOneBy(['user'=>$user->getId()]); //dump($gestionnaire->getZone()->getSlug());die();
             $atteint = $em->getRepository('AppBundle:Statistique')->objectifAction($gestionnaire->getZone()->getSlug());
-            $objectif = $em->getRepository('AppBundle:Zone')->findOneBy(['id'=>$gestionnaire->getZone()->getSlug()]);
+            $objectif = $em->getRepository('AppBundle:Zone')->findOneBy(['id'=>$gestionnaire->getZone()->getId()])->getObjectif(); //dump($objectif);die();
         }else{
             $atteint = $em->getRepository('AppBundle:Statistique')->objectifAction();
             $objectif = $em->getRepository('AppBundle:Zone')->findStatitiqueGlobal();

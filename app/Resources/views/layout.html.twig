@@ -53,7 +53,7 @@
 					<li><a href="{{ path('callcenter_index') }}" class="close-panel"><img src="{{ asset('ressources/images/icons/white/phone.png') }}" alt="" title="" /><span>Call center</span></a></li>
 				{% endif %}
 				{% if is_granted("ROLE_SUP") %}
-					<li><a href="#" data-popup=".popup-statistique" class="open-popup"><img src="{{ asset('ressources/images/icons/white/slider.png') }}" alt="" title="" /><span>Statistique</span></a></li>
+					<li><a href="#" data-popup=".popup-statzone" class="open-popup"><img src="{{ asset('ressources/images/icons/white/form.png') }}" alt="" title="" /><span>Statistiques</span></a></li>
 					<li><a href="#" data-popup=".popup-rapport" class="open-popup"><img src="{{ asset('ressources/images/icons/white/form.png') }}" alt="" title="" /><span>Rapport</span></a></li>
 					{{ render(url('messages')) }}
 				{% endif %}
@@ -62,7 +62,11 @@
                     <li><a href="#" class="close-panel"><img src="{{ asset('ressources/images/icons/white/user.png') }}" alt="" title="" /><span>Agents</span></a>-->
 
 				{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+					{% if is_granted("ROLE_ADMIN") %}
+						<li><a href="#" data-popup=".popup-valeur" class="open-popup"><img src="{{ asset('ressources/images/icons/white/slider.png') }}" alt="" title="" /><span>Statistiques</span></a></li>
+					{% endif %}
 					{% if is_granted("ROLE_SUPER_ADMIN") %}
+						<li><a href="#" data-popup=".popup-valeur" class="open-popup"><img src="{{ asset('ressources/images/icons/white/slider.png') }}" alt="" title="" /><span>Statistique</span></a></li>
 						<li><a href="#" data-popup=".popup-zone" class="open-popup"><img src="{{ asset('ressources/images/icons/white/download.png') }}" alt="" title="" /><span>Zone</span></a></li>
 						<li><a href="#" data-popup=".popup-user" class="open-popup"><img src="{{ asset('ressources/images/icons/white/user.png') }}" alt="" title="" /><span>Utilisateurs</span></a></li>
 						<li><a href="#" data-popup=".popup-gestionnaire" class="open-popup"><img src="{{ asset('ressources/images/icons/white/user.png') }}" alt="" title="" /><span>Gestionnaire</span></a></li>
@@ -179,8 +183,8 @@
 	<div class="popup popup-statistique">
 		<div class="content-block-login">
 			<div class="loginform">
-				<form id="LoginForm" method="post" action="{{ path('journal') }}">
-					<input type="submit" name="submit" class="form_submit" id="submit" value="Voir les statistiques" />
+				<form id="LoginForm" method="post" action="{{ path('statistique_new') }}">
+					<input type="submit" name="submit" class="form_submit" id="submit" value="Enregistrer les statistiques" />
 				</form>
 			</div>
 			<div class="close_loginpopup_button"><a href="#" class="close-popup"><img src="{{ asset('ressources/images/icons/white/menu_close.png') }}" alt="" title="" /></a></div>
@@ -206,6 +210,28 @@
 			<div class="close_loginpopup_button"><a href="#" class="close-popup"><img src="{{ asset('ressources/images/icons/white/menu_close.png') }}" alt="" title="" /></a></div>
 		</div>
 	</div>
+
+	<div class="popup popup-valeur">
+		<div class="content-block-login">
+			<div class="loginform">
+				<form id="LoginForm" method="post" action="{{ path('statistique_index') }}">
+					<input type="submit" name="submit" class="form_submit" id="submit" value="Voir les statistiques" />
+				</form>
+			</div>
+			<div class="close_loginpopup_button"><a href="#" class="close-popup"><img src="{{ asset('ressources/images/icons/white/menu_close.png') }}" alt="" title="" /></a></div>
+		</div>
+	</div>
+
+	<div class="popup popup-statzone">
+		<div class="content-block-login">
+			<div class="loginform">
+				<form id="LoginForm" method="post" action="{{ path('journal') }}">
+					<input type="submit" name="submit" class="form_submit" id="submit" value="Voir les statistiques" />
+				</form>
+			</div>
+			<div class="close_loginpopup_button"><a href="#" class="close-popup"><img src="{{ asset('ressources/images/icons/white/menu_close.png') }}" alt="" title="" /></a></div>
+		</div>
+	</div>
 	{{ render(url('observation')) }}
 	{{ render(url('zone_modification')) }}
 {% endblock %}
@@ -220,83 +246,9 @@
 	<script type="text/javascript" src="{{ absolute_url(asset('ressources/js/jquery.swipebox.js')) }}"></script>
 	<script type="text/javascript" src="{{ absolute_url(asset('ressources/js/email.js')) }}"></script>
 	<script src="{{ absolute_url(asset('ressources/js/Chart.min.js')) }}" type="text/javascript"></script>
+
+	{{ render(url('objectif_index')) }}
 {% endblock %}
-<script>
-    var ctx = document.getElementById("myChart").getContext('2d');
-    var myChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-            datasets: [{
-                label: '# of Votes',
-                data: [12, 19, 3, 5, 2, 3],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(255,99,132,1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
-                ],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero:true
-                    }
-                }]
-            }
-        }
-    });
-</script>
-<script>
-    var ctx = document.getElementById('myPieChart').getContext('2d');
-    var ctx = document.getElementById('Abobo').getContext('2d');
-    var myPieChart = new Chart(ctx,{
-        type: 'pie',
-        data: {
-            datasets: [{
-                data: [432890, 175876],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.9)',
-                    'rgba(54, 162, 235, 0.7)',
-                ],
-            }],
-            labels: [
-                'Objectifs',
-                'atteints',
-            ]},
-        //options: options
-    });
-    var abobo = new Chart(ctx,{
-        type: 'pie',
-        data: {
-            datasets: [{
-                data: [{{ render(url('objectif_index')) }}],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.9)',
-                    'rgba(54, 162, 235, 0.7)',
-                ],
-            }],
-            labels: [
-                'Objectifs',
-                'atteints',
-            ]},
-        //options: options
-    });
-</script>
 </body>
 
-</html>
 </html>

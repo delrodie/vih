@@ -1,1 +1,19 @@
-{{ objectif }},{{ atteint }}
+<script>
+    var ctx = document.getElementById('myPieChart').getContext('2d');
+    var myPieChart = new Chart(ctx,{
+        type: 'pie',
+        data: {
+            datasets: [{
+                data: [{{ objectif }}, {{ atteint }}],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.9)',
+                    'rgba(54, 162, 235, 0.7)',
+                ],
+            }],
+            labels: [
+                'Objectifs',
+                'atteints',
+            ]},
+        //options: options
+    });
+</script>

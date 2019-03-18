@@ -25,6 +25,10 @@
                                     {{ rapport.strategie|raw }}
                                 </blockquote>
                             </div>
+                            <p></p><strong><u><em>Estimation de personnes sensibilisées</em></u></strong>
+                            <blockquote>
+                                {{ rapport.population|number_format(0, '', '.') }}
+                            </blockquote>
                             <p></p><strong><u><em>Difficultés</em></u></strong>
                             <blockquote>
                                 {{ rapport.difficulte }}

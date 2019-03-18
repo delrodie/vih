@@ -35,6 +35,7 @@ class DefaultController extends Controller
 
     /**
      * @Route("journal", name="journal")
+     * @Method({"GET","POST"})
      */
     public function journalAction()
     {

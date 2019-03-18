@@ -10,7 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component
 /**
  * Statistique controller.
  *
- * @Route("statistique")
+ * @Route("statistiques")
  */
 class StatistiqueController extends Controller
 {
@@ -18,7 +18,7 @@ class StatistiqueController extends Controller
      * Lists all statistique entities.
      *
      * @Route("/", name="statistique_index")
-     * @Method("GET")
+     * @Method({"GET", "POST"})
      */
     public function indexAction()
     {
