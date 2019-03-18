@@ -18,7 +18,15 @@
         {% endblock %}
         <link rel="apple-touch-icon" href="images/apple-touch-icon.png" />
         <link rel="apple-touch-startup-image" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)" href="apple-touch-startup-image-640x1096.html">
-
+        <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+        <script>
+            var OneSignal = window.OneSignal || [];
+            OneSignal.push(function() {
+                OneSignal.init({
+                    appId: "c13edaf8-1019-491a-bd35-8199ec855f0b",
+                });
+            });
+        </script>
     </head>
     <body id="mobile_wrap">
 
@@ -40,23 +48,21 @@
             <nav class="user-nav">
                 <ul>
                     <li><a href="#" data-popup=".popup-home" class="open-popup"><img src="{{ asset('ressources/images/icons/white/home.png') }}" alt="" title="" /><span>Accueil</span></a></li>
-                    <li><a href="#" data-popup=".popup-statistique" class="open-popup"><img src="{{ asset('ressources/images/icons/white/slider.png') }}" alt="" title="" /><span>Statistique</span></a></li>
                     {% if is_granted("ROLE_CALL") %}
                         <li><a href="{{ path('callcenter_index') }}" class="close-panel"><img src="{{ asset('ressources/images/icons/white/phone.png') }}" alt="" title="" /><span>Call center</span></a></li>
                     {% endif %}
                     {% if is_granted("ROLE_SUP") %}
+                        <li><a href="#" data-popup=".popup-statistique" class="open-popup"><img src="{{ asset('ressources/images/icons/white/slider.png') }}" alt="" title="" /><span>Statistique</span></a></li>
+                        <li><a href="#" data-popup=".popup-rapport" class="open-popup"><img src="{{ asset('ressources/images/icons/white/form.png') }}" alt="" title="" /><span>Rapport</span></a></li>
                         {{ render(url('messages')) }}
                     {% endif %}
-                    <li><a href="#" data-popup=".popup-rapport" class="open-popup"><img src="{{ asset('ressources/images/icons/white/form.png') }}" alt="" title="" /><span>Rapport</span></a></li>
                     <li><a href="{{ path('rapport_index') }}" class="close-panel"><img src="{{ asset('ressources/images/icons/white/blog.png') }}" alt="" title="" /><span>Journal</span></a></li>
                     <!--<li><a href="#" class="close-panel"><img src="{{ asset('ressources/images/icons/white/photos.png') }}" alt="" title="" /><span>Photos</span></a></li>
                     <li><a href="#" class="close-panel"><img src="{{ asset('ressources/images/icons/white/user.png') }}" alt="" title="" /><span>Agents</span></a>-->
 
                     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                        {% if is_granted("ROLE_ADMIN") %}
-                            <li><a href="#" data-popup=".popup-zone" class="open-popup"><img src="{{ asset('ressources/images/icons/white/download.png') }}" alt="" title="" /><span>Zone</span></a></li>
-                        {% endif %}
                         {% if is_granted("ROLE_SUPER_ADMIN") %}
+                            <li><a href="#" data-popup=".popup-zone" class="open-popup"><img src="{{ asset('ressources/images/icons/white/download.png') }}" alt="" title="" /><span>Zone</span></a></li>
                             <li><a href="#" data-popup=".popup-user" class="open-popup"><img src="{{ asset('ressources/images/icons/white/user.png') }}" alt="" title="" /><span>Utilisateurs</span></a></li>
                             <li><a href="#" data-popup=".popup-gestionnaire" class="open-popup"><img src="{{ asset('ressources/images/icons/white/user.png') }}" alt="" title="" /><span>Gestionnaire</span></a></li>
                         {% endif %}
@@ -231,7 +237,14 @@
                 labels: ["Abidjan", "Bouake", "Daloa", "Korhogo", "Man", "San-Pedro"],
                 datasets: [{
                     label: '#Dépistés',
-                    data: [819, 94, 73, 104, 148, 73],
+                    data: [
+                        {{ render(url('histogramme_principal',{'slug': 'abidjan'})) }},
+                        {{ render(url('histogramme_principal',{'slug': 'bouake'})) }},
+                        {{ render(url('histogramme_principal',{'slug': 'daloa'})) }},
+                        {{ render(url('histogramme_principal',{'slug': 'korhogo'})) }},
+                        {{ render(url('histogramme_principal',{'slug': 'man'})) }},
+                        {{ render(url('histogramme_principal',{'slug': 'san-pedro'})) }}
+                    ],
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.9)',
                         'rgba(54, 162, 235, 0.9)',
@@ -262,25 +275,7 @@
             }
         });
     </script>
-    <script>
-        var ctx = document.getElementById('myPieChart').getContext('2d');
-        var myPieChart = new Chart(ctx,{
-            type: 'pie',
-            data: {
-                datasets: [{
-                    data: [2000000, 2477],
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.9)',
-                        'rgba(54, 162, 235, 0.7)',
-                    ],
-                }],
-                labels: [
-                    'Objectifs',
-                    'atteints',
-                ]},
-            //options: options
-        });
-    </script>
+    {{ render(url('diagramme_principal')) }}
     </body>
 
 </html>

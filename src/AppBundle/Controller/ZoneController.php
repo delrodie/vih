@@ -103,7 +103,7 @@ class ZoneController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $this->getDoctrine()->getManager()->flush(); dump($zone);die();
+            $this->getDoctrine()->getManager()->flush(); //dump($zone);die();
 
             return $this->redirectToRoute('zone_index');
         }

@@ -32,14 +32,14 @@
                             <p></p><strong><u><em>Statut</em></u></strong>
                             <blockquote>
                                 {% if (callcenter.statut == 0) %}
-                                    Problème résolution
+                                    Problème résolu
                                 {% elseif (callcenter.statut == 1) %}
                                     A rappeler
                                 {% else %}
                                     A transferer à Stéphane
                                 {% endif %}
                             </blockquote>
-                            <p></p><strong><u><em>Agent Call</em></u></strong>
+                            <p></p><strong><u><em>Agent Call Center</em></u></strong>
                             <blockquote>
                                 {{ callcenter.publiePar|title }}
                             </blockquote>

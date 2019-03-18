@@ -8,7 +8,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ZoneType extends AbstractType
+class StatistiqueType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -16,10 +16,11 @@ class ZoneType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('libelle', TextType::class,['attr'=>['class'=>'form_input', 'placeholder'=>'Nom de la zone']])
-            ->add('objectif', TextType::class,['attr'=>['class'=>'form_input', 'placeholder'=>"Objectif assigné à la zone", 'autocomplete'=>'off']])
-            //->add('statut', CheckboxType::class)
-            //->add('slug')->add('publiePar')->add('modifiePar')->add('publieLe')->add('modifieLe')
+            //->add('date')
+            ->add('valeur', TextType::class,['attr'=>['class'=>'form_input', 'placeholder'=>'La valeur statistique', 'autocomplete'=>'off']])
+            ->add('statut', CheckboxType::class,['required'=>false])
+            //->add('publiePar')->add('modifiePar')->add('publieLe')->add('modifieLe')
+            ->add('zone')
         ;
     }
     
@@ -29,7 +30,7 @@ class ZoneType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Zone'
+            'data_class' => 'AppBundle\Entity\Statistique'
         ));
     }
 
@@ -38,7 +39,7 @@ class ZoneType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'appbundle_zone';
+        return 'appbundle_statistique';
     }
 
 

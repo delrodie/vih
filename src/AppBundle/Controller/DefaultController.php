@@ -55,6 +55,19 @@ class DefaultController extends Controller
     }
 
     /**
+     * @Route("zones-modification", name="zone_modification")
+     */
+    public function zoneAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $zones = $em->getRepository('AppBundle:Zone')->findAll();
+
+        return $this->render('default/zone_popup.html.twig',[
+            'zones' => $zones
+        ]);
+    }
+
+    /**
      * @Route("messages", name="messages")
      */
     public function messageAction()
@@ -77,6 +90,34 @@ class DefaultController extends Controller
     }
 
     /**
+     * @Route("/diagramme-principal", name="diagramme_principal")
+     */
+    public function diagrammeAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $total = $em->getRepository('AppBundle:Zone')->findStatitiqueGlobal();
+        $objectif = $em->getRepository('AppBundle:Statistique')->objectifAction();
+        //dump($total);die();
+        return $this->render('default/diagramme_principal.html.twig',[
+            'total' => $total,
+            'objectif' => $objectif
+        ]);
+    }
+
+    /**
+     * @Route("/histogramme{slug}", name="histogramme_principal")
+     * @Method("GET")
+     */
+    public function histogrammeAction($slug)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $objectif = $em->getRepository('AppBundle:Statistique')->objectifAction($slug);
+        return $this->render('default/objectif.html.twig',[
+            'objectif' => $objectif
+        ]);
+    }
+
+    /**
      * @Route("{date}/call-center", name="callcenter")
      * @Method("GET")
      */
@@ -87,6 +128,20 @@ class DefaultController extends Controller
         return $this->render('callcenter/calls.html.twig',[
             'date' => $date,
             'calls' => $calls,
+        ]);
+    }
+
+    /**
+     * @Route("/statistiques/{date}", name="statistique")
+     * @Method("GET")
+     */
+    public function statistiqueAction($date)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $statistiques = $em->getRepository('AppBundle:Statistique')->findBy(['date'=>$date, 'statut'=>1]);
+        return $this->render('statistique/tableau.html.twig',[
+            'date' => $date,
+            'statistiques' => $statistiques
         ]);
     }
 }

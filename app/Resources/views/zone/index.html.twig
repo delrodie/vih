@@ -24,6 +24,9 @@
                             <label>Zone:</label>
                             {{ form_widget(form.libelle) }}
 
+                            <label>Objectif:</label>
+                            {{ form_widget(form.objectif) }}
+
                             <input type="submit" name="submit" class="form_submit"   value="Envoyer" />
                             {{ form_end(form) }}
                         </div>
@@ -42,18 +45,20 @@
                             <li class="table_row">
                                 <div class="table_section_small">N°</div>
                                 <div class="table_section">Zones</div>
-                                <div class="table_section">Statuts</div>
+                                <div class="table_section">Objectifs</div>
                             </li>
                             {% for zone in zones %}
                                 <li class="table_row">
                                     <div class="table_section_small">{{ loop.index }}</div>
-                                    <div class="table_section">{{ zone.libelle }}</div>
+                                    <div class="table_section">{{ zone.libelle }} &nbsp;
+
+                                    </div>
                                     <div class="table_section">
-                                        <a href="{{ path('zone_edit', {'slug': zone.slug}) }}">
+                                        <a href="#" data-popup=".popup-zones{{ zone.id }}" class="open-popup">
                                             {% if zone.statut %}
-                                                Actif
+                                                <span style="font-size: 1.1em; font-weight: bold; color: #0b8606;">{{ zone.objectif|number_format(0, '.', ' ') }}</span>
                                             {% else %}
-                                                Désactivé
+                                                <span style="font-size: 1.1em; font-weight: bold; color: #f20c0f;">{{ zone.objectif|number_format(0, '.', ' ') }}</span>
                                             {% endif %}
                                         </a>
                                     </div>

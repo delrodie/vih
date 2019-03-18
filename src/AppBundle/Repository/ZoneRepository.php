@@ -19,4 +19,12 @@ class ZoneRepository extends \Doctrine\ORM\EntityRepository
     {
         return $this->createQueryBuilder('z')->orderBy('z.libelle', 'ASC');
     }
+
+    public function findStatitiqueGlobal()
+    {
+        return $this->createQueryBuilder('z')
+                    ->select('SUM(z.objectif)')
+                    ->getQuery()->getSingleScalarResult()
+            ;
+    }
 }

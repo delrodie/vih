@@ -37,6 +37,13 @@ class Zone
     private $statut;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="objectif", type="integer", nullable=true)
+     */
+    private $objectif;
+
+    /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Gestionnaire", mappedBy="zone")
      */
     private $gestionnaires;
@@ -45,6 +52,11 @@ class Zone
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Rapport", mappedBy="zone")
      */
     private $rapports;
+
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Statistique", mappedBy="zone")
+     */
+    private $statistiques;
 
     /**
      * @var string
@@ -344,5 +356,63 @@ class Zone
     public function getRapports()
     {
         return $this->rapports;
+    }
+
+    /**
+     * Set objectif
+     *
+     * @param integer $objectif
+     *
+     * @return Zone
+     */
+    public function setObjectif($objectif)
+    {
+        $this->objectif = $objectif;
+
+        return $this;
+    }
+
+    /**
+     * Get objectif
+     *
+     * @return integer
+     */
+    public function getObjectif()
+    {
+        return $this->objectif;
+    }
+
+    /**
+     * Add statistique
+     *
+     * @param \AppBundle\Entity\Statistique $statistique
+     *
+     * @return Zone
+     */
+    public function addStatistique(\AppBundle\Entity\Statistique $statistique)
+    {
+        $this->statistiques[] = $statistique;
+
+        return $this;
+    }
+
+    /**
+     * Remove statistique
+     *
+     * @param \AppBundle\Entity\Statistique $statistique
+     */
+    public function removeStatistique(\AppBundle\Entity\Statistique $statistique)
+    {
+        $this->statistiques->removeElement($statistique);
+    }
+
+    /**
+     * Get statistiques
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getStatistiques()
+    {
+        return $this->statistiques;
     }
 }
