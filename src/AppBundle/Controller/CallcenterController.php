@@ -46,7 +46,12 @@ class CallcenterController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $statut = $request->get('statut');
-            $date = date('Y-m-d', time());
+
+            $date = $request->get('date'); //dump($date);die();
+            $callcenter->setStatut(1);
+            $callcenter->setDate($date);
+
+            //$date = date('Y-m-d', time());
             $callcenter->setStatut($statut);
             $callcenter->setDate($date);
             $em->persist($callcenter);
@@ -55,9 +60,14 @@ class CallcenterController extends Controller
             return $this->redirectToRoute('callcenter_show', array('slug' => $callcenter->getSlug()));
         }
 
+        $datefin = new \DateTime("now", new \DateTimeZone('Africa/Abidjan'));
+        $datedebut = "2019-03-01";
+
         return $this->render('callcenter/new.html.twig', array(
             'callcenter' => $callcenter,
             'form' => $form->createView(),
+            'datedebut' => $datedebut,
+            'datefin' => $datefin,
         ));
     }
 

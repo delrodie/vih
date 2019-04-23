@@ -18,6 +18,9 @@
                         <div class="contactform" id="contactForm">
                             {{ form_start(form) }}
 
+                            <label>Date:</label>
+                            <input type="date" name="date" class="form_input" min="{{ datedebut|date('Y-m-d') }}" max="{{ datefin|date('Y-m-d') }}">
+
                             <label>Numero:</label>
                             {{ form_widget(form.numero) }}
 

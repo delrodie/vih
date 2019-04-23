@@ -55,15 +55,16 @@
                         <li><a href="#" data-popup=".popup-statzone" class="open-popup"><img src="{{ asset('ressources/images/icons/white/slider.png') }}" alt="" title="" /><span>Statistiques</span></a></li>
                         <li><a href="#" data-popup=".popup-rapport" class="open-popup"><img src="{{ asset('ressources/images/icons/white/form.png') }}" alt="" title="" /><span>Rapport</span></a></li>
                         {{ render(url('messages')) }}
+                        <li><a href="{{ path('rapport_index') }}" class="close-panel"><img src="{{ asset('ressources/images/icons/white/blog.png') }}" alt="" title="" /><span>Journal</span></a></li>
                     {% endif %}
-                    <li><a href="{{ path('rapport_index') }}" class="close-panel"><img src="{{ asset('ressources/images/icons/white/blog.png') }}" alt="" title="" /><span>Journal</span></a></li>
-                    <!--<li><a href="#" class="close-panel"><img src="{{ asset('ressources/images/icons/white/photos.png') }}" alt="" title="" /><span>Photos</span></a></li>
+                    <!--<li><a href="{{ path('rapport_index') }}" class="close-panel"><img src="{{ asset('ressources/images/icons/white/blog.png') }}" alt="" title="" /><span>Journal</span></a></li>
+                    <li><a href="#" class="close-panel"><img src="{{ asset('ressources/images/icons/white/photos.png') }}" alt="" title="" /><span>Photos</span></a></li>
                     <li><a href="#" class="close-panel"><img src="{{ asset('ressources/images/icons/white/user.png') }}" alt="" title="" /><span>Agents</span></a>-->
 
                     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                         {% if is_granted("ROLE_ADMIN") %}
                             <li><a href="#" data-popup=".popup-valeur" class="open-popup"><img src="{{ asset('ressources/images/icons/white/slider.png') }}" alt="" title="" /><span>Statistiques</span></a></li>
-
+                            <li><a href="{{ path('rapport_index') }}" class="close-panel"><img src="{{ asset('ressources/images/icons/white/blog.png') }}" alt="" title="" /><span>Journal</span></a></li>
                         {% endif %}
                         {% if is_granted("ROLE_SUPER_ADMIN") %}
                             <li><a href="#" data-popup=".popup-zone" class="open-popup"><img src="{{ asset('ressources/images/icons/white/download.png') }}" alt="" title="" /><span>Zone</span></a></li>
