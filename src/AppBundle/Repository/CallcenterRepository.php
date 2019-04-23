@@ -15,7 +15,7 @@ class CallcenterRepository extends \Doctrine\ORM\EntityRepository
         return $this->createQueryBuilder('c')
                     ->addSelect('count(c.id)')
                     ->groupBy('c.date')
-                    ->orderBy('c.publieLe', 'DESC')
+                    ->orderBy('c.date', 'DESC')
                     ->getQuery()->getResult()
             ;
     }
